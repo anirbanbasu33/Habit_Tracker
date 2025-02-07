@@ -1,3 +1,5 @@
+#Dashboard= https://pixe.la/v1/users/anirbanbasu/graphs/graph1.html
+
 import requests
 from datetime import datetime
 
@@ -42,16 +44,32 @@ headers = {
 # POST - /v1/users/<username>/graphs/<graphID>
 pixel_creation_endpoint = f"{graph_endpoint}/{GRAPH_ID}"
 
-today_date = datetime(year=2025, month=2, day=6)
+today_date = datetime.now()
 # strftime is a inbuilt func. of datetime 
 # print(today_date.strftime("%Y%m%d"))
 
 pixel_creation_config = {
     "date": today_date.strftime("%Y%m%d"),    
-    "quantity": "15"
+    "quantity": "9"
 }
 
-response = requests.post(url=pixel_creation_endpoint, json=pixel_creation_config, headers=headers)
+# response = requests.post(url=pixel_creation_endpoint, json=pixel_creation_config, headers=headers)
+# print(response.text)
+
+
+# Update a pixel/ Put Pixel
+# PUT - /v1/users/<username>/graphs/<graphID>/<yyyyMMdd>
+put_pixel_endpoint = f"{pixel_creation_endpoint}/{today_date.strftime("%Y%m%d")}"
+
+put_pixel_config = {
+    "quantity": "15"
+}
+# response = requests.put(url=put_pixel_endpoint, json=put_pixel_config, headers= headers)
+# print(response.text)
+
+#Delete a pixel
+# /v1/users/<username>/graphs/<graphID>/<yyyyMMdd>
+# Delete data on 5thFeb2025
+delete_pixel_endpoint = f"{pixel_creation_endpoint}/{20250205}"
+response = requests.delete(url=delete_pixel_endpoint, headers=headers)
 print(response.text)
-
-
