@@ -50,26 +50,25 @@ today_date = datetime.now()
 
 pixel_creation_config = {
     "date": today_date.strftime("%Y%m%d"),    
-    "quantity": "9"
+    "quantity": input("How many pages did you read today ? ")
 }
 
-# response = requests.post(url=pixel_creation_endpoint, json=pixel_creation_config, headers=headers)
-# print(response.text)
-
+response = requests.post(url=pixel_creation_endpoint, json=pixel_creation_config, headers=headers)
+print(response.text)
 
 # Update a pixel/ Put Pixel
 # PUT - /v1/users/<username>/graphs/<graphID>/<yyyyMMdd>
-put_pixel_endpoint = f"{pixel_creation_endpoint}/{today_date.strftime("%Y%m%d")}"
+update_pixel_endpoint = f"{pixel_creation_endpoint}/{today_date.strftime("%Y%m%d")}"
 
-put_pixel_config = {
+update_pixel_config = {
     "quantity": "15"
 }
-# response = requests.put(url=put_pixel_endpoint, json=put_pixel_config, headers= headers)
+# response = requests.put(url=update_pixel_endpoint, json=update_pixel_config, headers= headers)
 # print(response.text)
 
 #Delete a pixel
 # /v1/users/<username>/graphs/<graphID>/<yyyyMMdd>
 # Delete data on 5thFeb2025
 delete_pixel_endpoint = f"{pixel_creation_endpoint}/{20250205}"
-response = requests.delete(url=delete_pixel_endpoint, headers=headers)
-print(response.text)
+# response = requests.delete(url=delete_pixel_endpoint, headers=headers)
+# print(response.text)
